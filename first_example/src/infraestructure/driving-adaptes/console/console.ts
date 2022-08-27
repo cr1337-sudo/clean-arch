@@ -1,3 +1,4 @@
+import { UserUpdaterUseCase } from './../../../application/usecases/userUpdater/index';
 import { UserGetterUseCase } from './../../../application/usecases/userGetter/index';
 // Un driving adapter es un punto de entrada a nuestra capa de dominio, puede ser un
 // aplicacion de consola, api rest, un listener de una cola sqs, etc
@@ -16,7 +17,7 @@ import { InMemoryUserRepository } from '../../implementations/inMemory/inMemoryU
     name: 'Luz',
     age: 12,
     username: 'luzxdlo',
-    id: 'id1'
+    id: 'id'
   };
   await userCreatorUseCase.run(userToCreate);
 
@@ -25,4 +26,14 @@ import { InMemoryUserRepository } from '../../implementations/inMemory/inMemoryU
   const usersReturned = await userGetterUseCase.run();
   console.log('GET USUARIOS');
   console.log(usersReturned);
+
+  // Actualizar usuarios
+  const userUpdaterUseCase = new UserUpdaterUseCase(inMemoryUserRepo);
+  await userUpdaterUseCase.run({
+    id: 'id',
+    username: 'Luci'
+  });
+
+  const usersReturned2 = await userGetterUseCase.run();
+  console.log(usersReturned2);
 })();

@@ -1,8 +1,8 @@
 export interface User{
   id: string
-  name: string
-  username: string
-  age: number
+  name?: string
+  username?: string
+  age?: number
 }
 
 // No confundir una entity con los modelos de sequalize o mongoose
