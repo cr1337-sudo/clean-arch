@@ -1,3 +1,4 @@
+import { UserDeleteUseCase } from './../../../application/usecases/userDelete/index';
 import { UserUpdaterUseCase } from './../../../application/usecases/userUpdater/index';
 import { UserGetterUseCase } from './../../../application/usecases/userGetter/index';
 // Un driving adapter es un punto de entrada a nuestra capa de dominio, puede ser un
@@ -36,4 +37,11 @@ import { InMemoryUserRepository } from '../../implementations/inMemory/inMemoryU
 
   const usersReturned2 = await userGetterUseCase.run();
   console.log(usersReturned2);
+
+  // Eliminar un usuario
+  const userDeleterUseCase = new UserDeleteUseCase(inMemoryUserRepo);
+  await userDeleterUseCase.run('id');
+
+  const usersReturned3 = await userGetterUseCase.run();
+  console.log(usersReturned3);
 })();
